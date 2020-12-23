@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root {
+    --navPurple: #681AA5;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+}
+
+.navbar-custom {
+    background-color: #ff5500;
+}
+
+#navBar {
+    background-color: #681AA5; 
+    height: 80px; 
+}
+
+#brandName {
+    font-size: 30px;
+    text-align: center;
+}
+
+#categorySquare {
+    background-color: var(--navPurple);
+    width: 210px;
+    height: 210px;
+    border-radius: 30px;
+}
+
+#categoryTable {
+    border-radius: 30px;
+    text-align: center;
+    transition: box-shadow .3s;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#categoryTable:hover {
+    transition: box-shadow .3s;
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
+    cursor: pointer;
+}
+
+#areaTitle {
+    font-size: 40px;
+}
+
+#categoryBoard {
+    text-decoration: none;
+    color: var(--navPurple) ;
+}

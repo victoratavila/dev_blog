@@ -1,0 +1,38 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
+
+<body>
+
+
+</body>
+
+<script>
+    const baseURL = 'http://localhost:8080';
+
+    $(document).ready(() => {
+        var currentURL = window.location.href;
+        currentURL= currentURL.split("/");
+        currentURL = currentURL[4];
+
+        const urlRequest = `${baseURL}/article/${currentURL}`;
+
+        axios({
+            method: 'get',
+            url: urlRequest,
+            responseType: 'json',
+            validateStatus: false
+        }).then((result) => {
+            if(result.data.error == true){
+                console.log('Not found');
+            } else {
+                console.log(result);
+            }
+        }).catch(err => {
+            // console.log(err + 'aaa');
+        });
+
+    })
+</script>
+
+
+<%- include('../partials/footer.ejs') %>
