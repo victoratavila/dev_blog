@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const baseURL = require('../public/js/api');
 const axios = require('axios');
+const moment = require('moment');
 
 router.get('/', (req, res) => {
     res.render('home.ejs');
@@ -26,7 +27,8 @@ router.get('/categorias/:slug', (req, res) => {
             axios.get(baseURL + '/article/' + slug).then(articles => {
                 if(articles.data.error != true ){
                     const articlesNotFound = '';
-                    res.render('articlesByCategory.ejs', { slug: slug, categoryName: category.data, articlesNotFound: articlesNotFound, articles: articles.data })
+                    const dataPost = articles.data;
+                    res.render('articlesByCategory.ejs', { slug: slug, categoryName: category.data, articlesNotFound: articlesNotFound, articles: articles.data, moment })
                 } else {
                     const articlesNotFound = 'Parece que essa categoria ainda não possui nenhum artigo cadastrado, seja o primeiro a publicar!';
                     res.render('articlesByCategory.ejs', { slug: slug, categoryName: category.data, articlesNotFound: articlesNotFound, articles: null })

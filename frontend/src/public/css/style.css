@@ -20,7 +20,8 @@ body {
 
 #brandName {
     font-size: 30px;
-    text-align: center;
+    text-align: left;
+    margin-top: -4px;
 }
 
 #categorySquare {
@@ -59,9 +60,18 @@ body {
     font-size: 30px;
 }
 
+#timeLabel {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    margin-left: 70px;
+}
+
 #emptyResponse {
     text-align: center;
-    margin-top: 100px;
+    background-color: white;
+    width: 50px;
+    height: 350px;
 }
 
 #backToCategoriesBtn {
@@ -105,4 +115,34 @@ body {
     color: #681AA5;
     margin-top: 20px;
     font-size: 23px;
+}
+
+#noArticleRegistered {
+    font-weight: 400;
+}
+
+#beTheFirst {
+    background-color: #681AA5;
+    color: white;
+    text-align: center;
+    width: 300px;
+}
+
+#labelNav {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.849);
+    font-weight: 300;
+    font-size: 20px;
+    margin-left: 25px;
+    transition: box-shadow .3s;
+}
+
+
+#labelNav:hover {
+    text-decoration: none;
+    color: white;
+    font-weight: 300;
+    font-size: 20px;
+    margin-left: 25px;
+    transition: box-shadow .3s;
 }
