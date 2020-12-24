@@ -25,7 +25,6 @@ router.get('/categorias/:slug', (req, res) => {
 
             axios.get(baseURL + '/article/' + slug).then(articles => {
                 if(articles.data.error != true ){
-                    console.log(articles)
                     const articlesNotFound = '';
                     res.render('articlesByCategory.ejs', { slug: slug, categoryName: category.data, articlesNotFound: articlesNotFound, articles: articles.data })
                 } else {

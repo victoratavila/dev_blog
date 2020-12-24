@@ -51,6 +51,28 @@ module.exports = {
                 res.status(400).json({error: `There is not a category related to the id ${id}, inform a new one and try again`});
             }
         })
+    },
+
+    async categoryBySlug(req, res){
+        const { slug } = req.params;
+
+        await category.findOne({
+            where: {
+                slug: slug
+            },
+
+            order: [
+                ['id', 'DESC']
+            ]
+        }).then((result) => {
+            if(result){
+                res.status(200).json(result);
+            } else {
+                res.status(404).json({error: `There is not a category related to the slug ${slug}`});
+            }
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
 }
