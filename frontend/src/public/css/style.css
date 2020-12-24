@@ -52,3 +52,57 @@ body {
     text-decoration: none;
     color: var(--navPurple) ;
 }
+
+#categoryName {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 30px;
+}
+
+#emptyResponse {
+    text-align: center;
+    margin-top: 100px;
+}
+
+#backToCategoriesBtn {
+    background-color: #681AA5;
+    color: white;
+    width: 120px;
+    border-radius: 30px;
+}
+
+#backToCategoriesBtn:hover {
+    transition: box-shadow .3s;
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
+    cursor: pointer;
+}
+
+#articleArea {
+    background-color: white;
+    height: 250px;
+    width: 100%;
+    transition: box-shadow .3s;
+}
+
+#articleArea:hover {
+    transition: box-shadow .3s;
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
+    cursor: pointer;
+}
+
+#articleName {
+    margin-left: 70px;
+}
+
+#authorArticleField {
+    margin-left: 70px;
+    font-weight: 300;
+}
+
+#readMore {
+    margin-left: 60px;
+    font-weight: bold;
+    color: #681AA5;
+    margin-top: 20px;
+    font-size: 23px;
+}
