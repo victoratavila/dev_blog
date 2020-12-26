@@ -44,6 +44,16 @@ router.get('/categorias/:slug', (req, res) => {
         console.log(err);
     })
 
+});
+
+router.get('/artigo', (req, res) => {
+
+    axios.get(baseURL + '/category').then((category) => {
+        res.render('newArticle.ejs', { category: category.data });
+    }).catch(err => {
+        console.log(err);
+    })
+
 })
 
 module.exports = router;

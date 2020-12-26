@@ -1,0 +1,112 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
+
+<body> <br> <br>
+
+    <div class="container">
+
+        <%- include('../partials/backToCategoriesBtn.ejs') %> <br> 
+        <h1 style="text-align: center;">Publicar artigo <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill=" #681AA5" class="bi bi-journal-bookmark" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M6 8V1h1v6.117L8.743 6.07a.5.5 0 0 1 .514 0L11 7.117V1h1v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8z"/>
+            <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+            <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+          </svg> </h1> <br>
+
+        <form id = "createArticleForm">
+            <div class="form-group">
+                
+                <div class="row">
+                    <div class="col" id = "space1">
+                      a
+                    </div>
+                    <div class="col-5">
+                        
+                        <label for="insertTitle">Título</label>
+                        <input type="text" required class="form-control" id="insertTitle" aria-describedby="emailHelp" > <br>
+                        
+                        <label for="author">Autor</label>
+                        <input type="text" required class="form-control" id="author" aria-describedby="emailHelp" > <br> 
+                      
+                        <label for="selectCategory">Categoria</label> 
+                        <select class="form-control"  required id="selectCategory"> 
+                            <option value="" disabled selected>Selecione</option>
+                              <% category.forEach((category) => { %>
+                                  <option value=" <%= category.id %> "> <%= category.category_name%> </option>
+                              <% }) %>
+                        </select> <br>
+          
+                        <label for="exampleFormControlTextarea1">Conteúdo</label>
+                        <textarea class="form-control" required id = "content" id="exampleFormControlTextarea1" rows="3"></textarea> <br>
+
+                        <button type="submit" class="btn btn-primary" id = "submitArticle">Publicar</button>
+
+                    </div>
+                    <div class="col" id="space2">
+                      a
+                    </div>
+                  </div>
+
+            
+            </div>
+     
+
+          </form>
+
+    </div>
+
+    <%- include('../partials/articleCreatedModal.ejs') %>
+    <%- include('../partials/articleCreationFailedModal.ejs') %>
+
+    <script>
+
+        $(document).ready(() => {
+        
+
+            $("#space1").css('visibility', 'hidden');
+            $("#space2").css('visibility', 'hidden');
+
+              // Avoid button to submit
+            $("#createArticleForm").submit(function( event ) {
+
+             
+
+                const baseURL = 'http://localhost:8080';
+
+                const articleTitle = $('#insertTitle').val();
+                const author = $('#author').val();
+                const content = $('#content').val();
+                const categoryId = $('#selectCategory').val();
+
+                axios({
+                    method: 'post',
+                    url: baseURL + '/article',
+                    data: {
+                        article_title: articleTitle,
+                        author: author,
+                        content: content,
+                        categoryId: categoryId
+                }
+                }).then((result) => {
+                    if(result.status == 201){
+                        $('#articleCreatedModal').modal('show');
+                    } else {
+                        $('#articleCreationFailedModal').modal('show');
+                    };
+                }).catch(err => {
+                       $('#articleCreationFailedModal').modal('show');
+                });
+
+                event.preventDefault();
+
+        });
+        })
+
+
+     
+
+    </script>
+
+</body>
+ 
+
+<%- include('../partials/footer.ejs') %>

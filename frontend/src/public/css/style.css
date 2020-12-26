@@ -146,3 +146,9 @@ body {
     margin-left: 25px;
     transition: box-shadow .3s;
 }
+
+#submitArticle {
+    background-color: #681AA5; 
+    color: white;
+    width: 100%;
+}
