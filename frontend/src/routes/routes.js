@@ -54,6 +54,18 @@ router.get('/artigo', (req, res) => {
         console.log(err);
     })
 
+});
+
+
+router.get('/artigo/:id', (req, res) => {
+    const { id } = req.params;
+    axios.get(baseURL + '/get-articles/' + id).then((article) => {
+        if(article.data.error){
+            res.render('notFoundArticle.ejs');
+        } else {
+            res.render('foundArticle.ejs', { article: article.data, moment });
+        }
+    })
 })
 
 module.exports = router;

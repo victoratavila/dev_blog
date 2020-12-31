@@ -58,6 +58,43 @@ body {
     font-style: normal;
     font-weight: 300;
     font-size: 30px;
+    text-decoration: underline;
+    text-decoration-color: var(--navPurple);
+    text-underline-position: under;
+    text-align: center;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+#ArticleName {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 45px;
+    text-decoration: underline;
+    text-decoration-color: var(--navPurple);
+    text-underline-position: under;
+    text-align: center;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+#articleInfo {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    text-underline-position: under;
+    text-align: center;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
 }
 
 #timeLabel {
@@ -161,3 +198,26 @@ body {
     z-index: 200000;
     }
 
+@media (max-width: 600px) {
+    #ArtigosH1 {
+        display: none;
+    }
+}
+
+#articlesContainer {
+    background-color: white;
+    height: 600px;
+}
+
+#contentDiv {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 30px;
+    text-underline-position: under;
+    text-align: center;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}

@@ -24,8 +24,8 @@
                         <label for="insertTitle">Título</label>
                         <input type="text" required class="form-control" id="insertTitle" aria-describedby="emailHelp" > <br>
                         
-                        <label for="author">Autor</label>
-                        <input type="text" required class="form-control" id="author" aria-describedby="emailHelp" > <br> 
+                        <label for="author" hidden>Autor</label>
+                        <input type="text" required class="form-control" hidden value="Victor Atavila" id="author" aria-describedby="emailHelp" > 
                       
                         <label for="selectCategory">Categoria</label> 
                         <select class="form-control"  required id="selectCategory"> 
@@ -59,8 +59,7 @@
 
     <script>
 
-        $(document).ready(() => {
-        
+        $(document).ready(() => {        
 
             $("#space1").css('visibility', 'hidden');
             $("#space2").css('visibility', 'hidden');
@@ -77,7 +76,6 @@
                 const articleTitle = $('#insertTitle').val();
                 const author = $('#author').val();
                 const content = $('#content').val();
-                console.log(content)
                 const categoryId = $('#selectCategory').val();
 
                 axios({
@@ -91,7 +89,7 @@
                 }
                 }).then((result) => {
                     if(result.status == 201){
-                        $('#articleCreatedModal').modal('show');
+                        $('#staticBackdrop').modal('show');
                     } else {
                         $('#articleCreationFailedModal').modal('show');
                     };
@@ -103,6 +101,7 @@
 
         });
         })
+
 
 
      
