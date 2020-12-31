@@ -15,11 +15,11 @@
         <form id = "createArticleForm">
             <div class="form-group">
                 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col" id = "space1">
                       a
                     </div>
-                    <div class="col-5">
+                    <div class="col-5"> -->
                         
                         <label for="insertTitle">Título</label>
                         <input type="text" required class="form-control" id="insertTitle" aria-describedby="emailHelp" > <br>
@@ -36,18 +36,18 @@
                         </select> <br>
           
                         <label for="exampleFormControlTextarea1">Conteúdo</label>
-                        <textarea class="form-control" required id = "content" id="exampleFormControlTextarea1" rows="3"></textarea> <br>
+                        <textarea class="form-control" id = "content" id="exampleFormControlTextarea1" rows="3"></textarea> <br>
 
                         <button type="submit" class="btn btn-primary" id = "submitArticle">Publicar</button>
 
                     </div>
-                    <div class="col" id="space2">
+                    <!-- <div class="col" id="space2">
                       a
-                    </div>
+                    </div> -->
                   </div>
 
             
-            </div>
+            <!-- </div> -->
      
 
           </form>
@@ -72,9 +72,12 @@
 
                 const baseURL = 'http://localhost:8080';
 
+                tinyMCE.triggerSave();
+
                 const articleTitle = $('#insertTitle').val();
                 const author = $('#author').val();
                 const content = $('#content').val();
+                console.log(content)
                 const categoryId = $('#selectCategory').val();
 
                 axios({
@@ -107,6 +110,13 @@
     </script>
 
 </body>
+
+<script>
+    tinymce.init({
+      selector: '#content',
+      language: 'pt_BR'
+    });
+</script>
  
 
 <%- include('../partials/footer.ejs') %>

@@ -2,8 +2,12 @@
 <%- include('../partials/navbar.ejs') %>
 
 <body>
+
+  <%- include('../partials/createCategoryModal.ejs') %>
+  
+
     <div class="container"> <br> <br> <br> 
-        <h1 id = "areaTitle">Categorias <svg xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;" width="30" height="30" fill="#681AA5" class="bi bi-plus-circle" viewBox="0 0 16 16">
+        <h1 id = "areaTitle">Categorias <svg xmlns="http://www.w3.org/2000/svg" id = "createCategoryButton" style="cursor: pointer;" width="30" height="30" fill="#681AA5" class="bi bi-plus-circle" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
           <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
         </svg> </h1>   <br> 
@@ -23,15 +27,78 @@
           </div>
 
     </div>
+
+    <!-- <div class="toast" style="z-index: 7000;" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">Devblog</strong>
+        <small class="text-muted">Agora mesmo</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+       Sucesso! Uma nova categoria foi registrada! :)
+      </div>
+    </div> -->
+  
+
 </body>
 
 <script>
+
+const baseURL = 'http://localhost:8080';
+
+$(document).ready(() => {
+  $('#createdCategoryAlert').hide();
+  $('#categoryCreationError').hide();
+  $('#unexpectedError').hide();
+})
+
 
 // Redirect category button to articles page
   async function redirect(){
     const divToRedirect = document.getElementById('categoryTable');
     const url = divToRedirect.getAttribute('data-redirect');
   }
+
+  $('#createCategoryButton').click(() => {
+    $('#createCategoryModal').modal('show');
+  })
+
+
+  $('#createCategoryForm').submit(event => {
+
+    const category_name = $('#category_nameInput').val();  
+
+    axios({
+      method: 'post',
+      url: baseURL + '/category',
+      data: {
+        category_name: category_name
+      }
+  }).then((result) => {
+    if(result.data.alreadyExistsError){
+      $('#createdCategoryAlert').hide();
+      $('#categoryCreationError').show();
+    } else {
+      $('#category_nameInput').val('');
+      $('#categoryCreationError').hide();
+      $('#createdCategoryAlert').show();
+    }
+  }).catch(err => {
+      console.log(err);
+      $('#categoryCreationError').hide();
+      $('#createdCategoryAlert').hide();
+      $('#unexpectedError').show();
+  })
+
+    event.preventDefault();
+  
+  })
+
+  $('#closeModalButton').click(() => {
+    window.location.reload(true);
+  })
+
+  
 
 </script>
 
