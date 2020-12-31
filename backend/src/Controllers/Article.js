@@ -119,7 +119,7 @@ module.exports = {
             if(result){
                 res.status(200).json(result);
             } else {
-                res.json({error: true, result: 'Articles not found by the id ' + result.id});
+                res.json({error: true, result: 'Articles not found by the id ' + id});
             }
         })
     }
