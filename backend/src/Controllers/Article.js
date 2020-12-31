@@ -106,6 +106,22 @@ module.exports = {
         }).catch(err => {
             console.log(err);
         })
+    },
+
+    async articleById(req, res){
+        const { id } = req.params;
+
+        await article.findOne({
+            where: {
+                id: id
+            }
+        }).then((result) => {
+            if(result){
+                res.status(200).json(result);
+            } else {
+                res.json({error: true, result: 'Articles not found by the id ' + result.id});
+            }
+        })
     }
 
 }

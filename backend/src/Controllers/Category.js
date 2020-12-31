@@ -20,7 +20,7 @@ module.exports = {
 
         await category.findOne({ where: { category_name: category_name } }).then((search) => {
             if(search){
-                res.status(400).json({error: 'This category was already registered, try a new one'});
+                res.status(200).json({result: 'This category was already registered, try a new one', alreadyExistsError: true});
             } else {
                 category.create({ 
                     category_name: category_name,
