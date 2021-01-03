@@ -5,7 +5,19 @@
 
     <div class="container">
 
-        <%- include('../partials/backToCategoriesBtn.ejs') %> <br> <br> <br>
+        <div class="float">
+
+            <%- include('../partials/backToCategoriesBtn.ejs') %>        
+
+            <% if(articles == null || articles == undefined || articles == "") { %>
+
+            <% } else { %>
+                <%- include('../partials/newArticleButton.ejs') %>  
+            <% } %>
+
+
+        </div> <br> <br> 
+        
         
                <i id = "categoryName"  class="align-middle" style="text-align: center;"> <%=  categoryName.category_name %> </i>
            <br> <br> <br>
@@ -49,8 +61,8 @@
                         <div class="col order-5">
                          
                         </div>
-                        <div class="col order-1">
-                            <a href="/artigo" class = "btn" id = "beTheFirst">Publicar o primeiro</a>
+                        <div class="col order-1" style="text-align: center">
+                            <a href="/artigo" class = "btn" id = "beTheFirst" style="text-align: center">Publicar o primeiro</a>
                         </div>
                       </div>
 

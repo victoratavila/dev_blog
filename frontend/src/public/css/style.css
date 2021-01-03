@@ -146,6 +146,12 @@ body {
     font-weight: 300;
 }
 
+#authorArticleField2 {
+    font-size: 25px;
+    font-weight: 300;
+    text-align: center;
+}
+
 #readMore {
     margin-left: 60px;
     font-weight: bold;
@@ -163,6 +169,7 @@ body {
     color: white;
     text-align: center;
     width: 300px;
+    font-size: 20px
 }
 
 #labelNav {
@@ -210,14 +217,42 @@ body {
 }
 
 #contentDiv {
+    font-size: normal;
+    text-align: center;
+    font-size: 1px;
+}
+
+#articleContainer {
+    background:rgba(255, 255, 255, 0.363);
+    height: 100%;
+ 
+}
+
+#loginButton {
+    border-radius: 20px;
+}
+
+#articleTitle {
+    text-align: center;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+#separation {
     font-style: normal;
-    font-weight: 300;
-    font-size: 30px;
-    text-underline-position: under;
-    text-align: center;
-    justify-content: center;
-    left: 0;
-    position: absolute;
-    text-align: center;
-    width: 100%;
+    font-weight: lighter;
+    color: rgba(0, 0, 0, 0.349);
+    font-size: 25px;
+}
+
+#authorName {
+    font-style: normal;
+    font-weight: bold;
+    color: #681AA5;
+    font-size: 25px;
+}
+
+#newArticleButton {
+    width: 138px;
+    border-radius: 30px;
 }
