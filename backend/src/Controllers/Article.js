@@ -1,6 +1,7 @@
 const express = require('express');
 const article = require('../models/article');
 const category = require('../models/category');
+const converter = require('convert-seconds');
 
 module.exports = {
 
@@ -116,8 +117,14 @@ module.exports = {
                 id: id
             }
         }).then((result) => {
+
+            var readingTime = result.content;
+            readingTime = readingTime.split(" ").length;
+            readingTime = parseInt((readingTime*60)/200);
+            readingTime = converter(readingTime).minutes;
+
             if(result){
-                res.status(200).json(result);
+                res.status(200).json({result: result, readingTime: readingTime});
             } else {
                 res.json({error: true, result: 'Articles not found by the id ' + id});
             }
