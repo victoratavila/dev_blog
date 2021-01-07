@@ -4,6 +4,12 @@ const baseURL = require('../public/js/api');
 const axios = require('axios');
 const moment = require('moment');
 
+// Login form
+
+router.get('/login', (req, res) => {
+    res.render('loginForm.ejs');
+});
+
 router.get('/', (req, res) => {
     res.render('home.ejs');
 });
