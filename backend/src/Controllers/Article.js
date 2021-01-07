@@ -89,7 +89,11 @@ module.exports = {
                article.findAll({
                    where: {
                        categoryId: result.id
-                   }
+                   },
+
+                   order: [
+                    ['id', 'DESC']
+                ]
                }).then((articles) => {
 
                     if(articles != "" && articles != undefined && articles != null){
