@@ -10,10 +10,13 @@
   "author": "Victor Atavila",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
     "convert-seconds": "^1.0.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mysql2": "^2.2.5",
+    "nodemailer": "^6.4.17",
     "sequelize": "^6.3.5",
     "slugify": "^1.4.6"
   },

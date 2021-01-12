@@ -1,6 +1,6 @@
-const express = require('express');
 const category = require('../models/category');
 const slugify = require('slugify');
+const sendMail = require('../Mail/sender');
 
 module.exports = {
 
@@ -43,6 +43,14 @@ module.exports = {
                         id: id
                     }
                 }).then(() => {
+                    
+                    sendMail(
+                        'Contato Nexum', 
+                        'contato@nxadmin.com.br', 
+                        'victoratavila@hotmail.com', 
+                        `Categoria ${result.category_name} Deletada com sucesso!`, 
+                        'Olá! Passando aqui para te avisar que você removeu uma categoria com sucesso do Devblog! Até logo! :)');
+
                     res.status(200).json({result: 'This category was successfully deleted'});
                 }).catch(err => {
                     console.log(err);
