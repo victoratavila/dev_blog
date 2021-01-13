@@ -1,7 +1,9 @@
 const express = require('express');
 const user = require('../models/user');
 const bcrypt = require('bcryptjs');
-const accountCreatedMail = require('../Mail/sender');
+const sendMail = require('../Mail/sender');
+const jwt = require('jsonwebtoken');
+const secret = '1qzCtlJGjD42i4P5af71rjTscYkYyUAoBzrwb12B4w4dpJYFoW';
 
 module.exports = {
 
@@ -23,13 +25,26 @@ module.exports = {
         }).then(async result => {
 
             if(result == [] || result == null || result == undefined || result == ""){
-                res.status(404).json({result: `User not found with the e-mail ${email}`});
+                res.status(403).json({result: `User not found with the e-mail ${email}`});
             } else {
                const hash = result.password;
                const validator = bcrypt.compareSync(password, hash);
 
                if(validator){
-                   res.status(200).json({result: 'User logged'});
+
+                   jwt.sign({ 
+                       username: result.username,
+                       email: result.email, 
+                       admin: result.admin,
+                       id: result.id
+                    }, secret, { expiresIn: '1h'}, (err, token) => {
+                        if(err){
+                            res.status(400).json({error: 'Fail to create the token'});
+                        } else {
+                            res.status(200).json({token: token});
+                        }
+                    });
+
                } else {
                    res.status(403).json({error: 'Some of the credentials is wrong, please try again'});
                }
@@ -56,6 +71,20 @@ module.exports = {
             if(result == [] || result == null || result == undefined || result == ""){
 
                 user.create(userData).then(() => {
+
+                    // sendMail(
+                    //     // Sender name
+                    //     'Devblog', 
+                    //     // Sender email
+                    //     'contato@nxadmin.com.br', 
+                    //     // Recipient
+                    //     `${userData.email}`, 
+                    //     // Subject
+                    //     `Cadastro realizado com sucesso!`, 
+                    //     // Content
+                    //     `Olá, ${userData.username}! Passando aqui para te avisar que sua conta foi criada com sucesso no Devblog, esperamos que você curta basta nosso conteúdo! <3`
+                    // );
+
                     res.status(200).json({result: "User successfully created"});
                 }).catch(err => {
                     console.log(err);
