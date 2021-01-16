@@ -20,7 +20,7 @@ const User = connection.define('user', {
 
     admin: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: true
     }
 
   });

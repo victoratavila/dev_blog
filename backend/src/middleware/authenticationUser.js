@@ -1,6 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const secret = '1qzCtlJGjD42i4P5af71rjTscYkYyUAoBzrwb12B4w4dpJYFoW';
+const secret = require('./secret.js');
 
 async function auth(req, res, next){
     const authToken = req.headers['authorization'];
@@ -14,7 +14,6 @@ async function auth(req, res, next){
             if(err){
                 res.status(401).json({result: 'Invalid token'});
             } else {
-                
                 const userLogged = {
                     username: data.username,
                     email: data.email,
@@ -22,7 +21,6 @@ async function auth(req, res, next){
                     id: data.id
                 }
                 next();
-                console.log(userLogged);
             }
         })
     

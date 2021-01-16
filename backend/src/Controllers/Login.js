@@ -3,7 +3,7 @@ const user = require('../models/user');
 const bcrypt = require('bcryptjs');
 const sendMail = require('../Mail/sender');
 const jwt = require('jsonwebtoken');
-const secret = '1qzCtlJGjD42i4P5af71rjTscYkYyUAoBzrwb12B4w4dpJYFoW';
+const secret = require('../middleware/secret');
 
 module.exports = {
 
@@ -41,7 +41,13 @@ module.exports = {
                         if(err){
                             res.status(400).json({error: 'Fail to create the token'});
                         } else {
-                            res.status(200).json({token: token});
+                            const userLogedInfo = {
+                                username: result.username,
+                                email: result.email, 
+                                admin: result.admin,
+                                id: result.id
+                            }
+                            res.status(200).json({token: token, userLogedInfo: userLogedInfo});
                         }
                     });
 
@@ -59,6 +65,11 @@ module.exports = {
 
     async registerUser(req, res){
         let userData = { username, email, admin, password } = req.body;
+
+        if(userData.admin == undefined || userData.admin == null){
+             userData.admin = false;
+        }
+
         const salt = bcrypt.genSaltSync(10);
         userData.password = bcrypt.hashSync(password, salt);
 
@@ -91,13 +102,43 @@ module.exports = {
                 })
 
             } else {
-                res.status(409).json({error: `User already exists with the e-mail ${userData.email}, try to register a new one`});
+                res.status(200).json({error: `User already exists with the e-mail ${userData.email}, try to register a new one`});
             }
 
         }).catch(err => {
             console.log(err);
         })
     
+    },
+
+    async refreshToken(req, res){
+        const token = req.body.token;
+        await jwt.verify(token, secret, (err, data) => {
+            if(err){
+                res.status(403).json({error: 'Invalid token to refresh'});
+            } else {
+                jwt.sign({ 
+                    username: data.username,
+                    email: data.email, 
+                    admin: data.admin,
+                    id: data.id
+                 }, secret, { expiresIn: '1h'}, (err, token) => {
+                     if(err){
+                         res.status(400).json({error: 'Fail to create a new token'});
+                     } else {
+                         const userLogedInfo = {
+                             username: data.username,
+                             email: data.email, 
+                             admin: data.admin,
+                             id: data.id
+                         }
+                         res.status(200).json({token: token, userLogedInfo: userLogedInfo});
+                     }
+                 });
+            }
+        })
     }
+
+
 
 }

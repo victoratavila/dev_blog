@@ -3,11 +3,12 @@ const router = express.Router();
 const Category = require('../Controllers/Category');
 const Article = require('../Controllers/Article');
 const Login = require('../Controllers/Login');
-const auth = require('../middleware/authentication');
+const auth = require('../middleware/authenticationUser');
+const authAdmin = require('../middleware/authenticationAdmin');
 
 // Category 
 router.get('/category', Category.getCategory);
-router.post('/category', auth, Category.createCategory);
+router.post('/category', authAdmin, Category.createCategory);
 router.delete('/category/:id', Category.deleteCategory);
 router.get('/category/:slug', Category.categoryBySlug);
 
@@ -23,5 +24,6 @@ router.get('/get-articles/:id', Article.articleById);
 router.post('/user', Login.login);
 router.get('/user', Login.getUser);
 router.post('/new-user', Login.registerUser);
+router.post('/refresh', Login.refreshToken);
 
 module.exports = router;
