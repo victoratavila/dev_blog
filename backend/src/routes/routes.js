@@ -14,7 +14,7 @@ router.get('/category/:slug', Category.categoryBySlug);
 
 // Article
 router.get('/article', Article.getArticle);
-router.post('/article', Article.createArticle);
+router.post('/article', auth, Article.createArticle);
 router.delete('/article/:id', Article.deleteArticle);
 router.put('/article', Article.updateArticle);
 router.get('/article/:slug', Article.articleBySlug);
@@ -22,7 +22,7 @@ router.get('/get-articles/:id', Article.articleById);
 
 // Login
 router.post('/user', Login.login);
-router.get('/user', Login.getUser);
+router.get('/user', auth, Login.getUser);
 router.post('/new-user', Login.registerUser);
 router.post('/refresh', Login.refreshToken);
 
