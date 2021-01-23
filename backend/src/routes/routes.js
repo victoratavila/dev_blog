@@ -14,7 +14,7 @@ router.get('/category/:slug', Category.categoryBySlug);
 
 // Article
 router.get('/article', Article.getArticle);
-router.post('/article', auth, Article.createArticle);
+router.post('/article', Article.createArticle);
 router.delete('/article/:id', Article.deleteArticle);
 router.put('/article', Article.updateArticle);
 router.get('/article/:slug', Article.articleBySlug);

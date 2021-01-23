@@ -1,3 +1,3 @@
-const secret = process.env.secret;
+const secret = '';
 
 module.exports = secret;
