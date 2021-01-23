@@ -8,6 +8,12 @@
     background-color: #681AA5;
     height: 100vh;
 }
+
+#formContainer {
+    border-radius: 70px;
+    height: 550px;
+}
+
 /* 
 #loginForm {
     background-color: #f5f5f5;
@@ -170,12 +176,43 @@ body {
     font-size: 23px;
 }
 
+#deleteArticleBtn {
+    border: 0;
+    color: #fd3956;
+    background-color: #fff0f2;
+}
+
+#deleteArticleBtn:hover {
+    border: 0;
+    color: #fd3956;
+    background-color: #ffdfe4;
+}
+
+.generalDeleteBtn {
+    border: 0;
+    color: #fd3956;
+    background-color: #fff0f2;
+}
+
+#dateInfo {
+    font-style: normal;
+    color: #000000;
+}
+
 #trashBtn {
     border-radius: 5px;
+    border: 0;
+    color: #fd3956;
     margin-left: 20px;
     font-weight: normal;
     margin-top: 20px;
     font-size: 23px;
+    background-color: #fff0f2;
+    width: 120px;
+}
+
+#trashBtn:hover {
+    background-color: #ffdfe4;
 }
 
 #noArticleRegistered {
@@ -248,6 +285,7 @@ body {
 
 #loginButton {
     border-radius: 20px;
+    width: 100px;
 }
 
 #articleTitle {
@@ -274,3 +312,7 @@ body {
     width: 138px;
     border-radius: 30px;
 }
+
+/* #userNavItem {
+    margin-left: 1080px;
+} */

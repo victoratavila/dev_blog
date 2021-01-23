@@ -1,5 +1,6 @@
 <%- include('../partials/header.ejs') %>
-<%- include('../partials/userNotFoundModal.ejs') %>
+<%- include('../partials/userCreatedModal.ejs') %>
+<%- include('../partials/userAlreadyExistsErrorModal.ejs') %>
 
 <!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
 
@@ -143,18 +144,24 @@ body {
 }
 </style>
 
-<body> <br> <br> <br> <br> <br>
+<body> <br> <br> <br> <br> 
     <div class="container">
       <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
           <div class="card card-signin my-5">
             <div class="card-body">
-              <h5 class="card-title text-center">Login | Devblog</h5>
-              <form class="form-signin" id = "formLogin">
+              <h5 class="card-title text-center">Cadastro | Devblog</h5>
+              <form class="form-signin" id = "createUserForm">
+
                 <div class="form-label-group">
                   <input type="email" id="email" class="form-control" placeholder="Email address" required autofocus>
                   <label for="email">Email</label>
                 </div>
+
+                <div class="form-label-group">
+                    <input type="text" id="username" class="form-control" placeholder="Email address" required autofocus>
+                    <label for="username">Nome</label>
+                  </div>
   
                 <div class="form-label-group">
                   <input type="password" id="password" class="form-control" placeholder="Password" required>
@@ -167,10 +174,10 @@ body {
                 </div> -->
                 <button class="btn btn-lg btn-primary btn-block text-uppercase" style="width: 100%; background-color: #681AA5;" type="submit">Entrar</button>
                 <hr class="my-4" style="text-align: center;">
-                    <a href="/cadastro"  style="text-align: center; text-decoration: none;">Não tem conta? Cadastre-se! </a>
+                    <a href="/login" style="text-align: center; text-decoration: none;">Já tem conta? Faça o login! </a>
               </form>
             </div> <br>
-            <a class="btn btn-primary" href="/" style="text-align: center;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+            <a class="btn btn-primary" href="/" style="text-align: center;"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
               <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
             </svg> Voltar para o início</a>
@@ -179,49 +186,40 @@ body {
       </div>
     </div>
 
+    
 
-    <script>
+<script>
 
-      const baseURL = 'http://localhost:8080';
-      
-          $(document).ready(() => {
-      
-              $('#formLogin').submit(event => {
-                  event.preventDefault();
-                  
-                  const userInfo = {
-                      email: $('#email').val(),
-                      password: $('#password').val()
-                  }
-      
-                  axios({
-                      method: 'post',
-                      url: baseURL + '/user',
-                      data: userInfo
-                  }).then((result) => {
+const baseURL = 'http://localhost:8080';
 
-                      localStorage.setItem('username', result.data.userLogedInfo.username);
-                      localStorage.setItem('email', result.data.userLogedInfo.email);
-                      localStorage.setItem('id', result.data.userLogedInfo.id);
-                      localStorage.setItem('token', result.data.token);
-                      localStorage.setItem('admin', result.data.userLogedInfo.admin);
-                      const time_to_login = Date.now() + 3600000 ; // one hour
-                      localStorage.setItem('timer', JSON.stringify(time_to_login));
-                      window.location.href = "/categorias";
+    $(document).ready(() => {
 
-                  }).catch(err => {
-                      if(err.response.status){
-                        $('#userNotFoundModal').modal('show');
-                        localStorage.clear();
-                      };
-                  });
-              });
-      
-          })
-      </script>
-          
-        </body>
+        $('#createUserForm').submit(event => {
+            event.preventDefault();
+            
+            const userInfo = {
+                username: $('#username').val(),
+                email: $('#email').val(),
+                password: $('#password').val()
+            }
 
+            axios({
+                method: 'post',
+                url: baseURL + '/new-user',
+                data: userInfo
+            }).then((result) => {
+                if(result.data.error != undefined){
+                    $('#userAlreadyExistsErrorModal').modal('show');
+                } else {
+                    $('#userCreatedModal').modal('show');
+                };
+            }).catch(err => {
+              
+            });
+        });
+
+    })
+</script>
     
   </body>
 

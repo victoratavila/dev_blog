@@ -14,6 +14,16 @@
         <li class="nav-item">
           <a class="nav-link" href="/categorias">Categorias</a>
         </li>
+
+        <li class="nav-item dropdown" id = "userNavItem" hidden> 
+          <div class="nav-link dropdown-toggle" href="#" id="userInfoArea" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      
+          </div>
+          <ul class="dropdown-menu" aria-labelledby="userInfoArea">
+            <li><a class="dropdown-item" href="#"> Meu perfil</a></li>
+            <li><a class="dropdown-item" href="#" id = "logoutButton">Sair</a></li>
+          </ul>
+        </li>
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Victor
@@ -23,9 +33,13 @@
           </ul>
         </li> -->
       </ul>
-      <form class="d-flex" >
-        <a href="/login" class="btn btn-outline-light" id="loginButton" type="submit">Login</a>
-      </form>
+
+     
+      
+        <form class="d-flex">
+          <a href="/login" class="btn btn-light" hidden id="loginButton" type="submit">Entrar</a>
+        </form>
+
     </div>
   </div>
 </nav>

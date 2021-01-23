@@ -3,11 +3,16 @@ const router = express.Router();
 const baseURL = require('../public/js/api');
 const axios = require('axios');
 const moment = require('moment');
+const expiredStorage = require('expired-storage');
 
 // Login form
 
 router.get('/login', (req, res) => {
     res.render('loginForm.ejs');
+});
+
+router.get('/cadastro', (req, res) => {
+    res.render('registerForm.ejs');
 });
 
 router.get('/', (req, res) => {
